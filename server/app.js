@@ -13,6 +13,7 @@ const meRouter = require("./routes/meRouter");
 const usersRouter = require("./routes/usersRouter");
 const gameRouter = require("./routes/gameRouter");
 const libraryRouter = require("./routes/libraryRouter");
+const wishlistRouter = require("./routes/wishlistRouter");
 const app = express();
 
 // Connect to MongoDB
@@ -44,6 +45,7 @@ app.use("/auth", authRouter);
 app.use("/me", meRouter);
 app.use("/games", gameRouter);
 app.use("/library", libraryRouter);
+app.use("/wishlist", wishlistRouter);
 
 const PORT = process.env.PORT || 5000;
 
