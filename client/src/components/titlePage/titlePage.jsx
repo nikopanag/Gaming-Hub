@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getGameById } from '../../api/gameApiCalls';
-import CurrentDeals from './CurrentDeals';
 
 const TitlePage = () => {
   const { id } = useParams();
@@ -44,7 +43,6 @@ const TitlePage = () => {
         Platforms: {game.platforms.map(plat => plat.platform.name).join(', ')}
       </p>
       <p>Description: {game.description_raw}</p>
-      <CurrentDeals gameTitle={gameTitle} />
     </div>
   );
 };

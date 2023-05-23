@@ -3,13 +3,16 @@ import { useEffect, useState, useContext } from 'react';
 import { getLast30DaysReleases } from '../../api/gameApiCalls';
 import styles from './last30Days.module.scss';
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import { IoHeartOutline, IoHeartSharp } from 'react-icons/io5';
 import { DataContext } from '../../data/DataContext';
 import { removeGameFromLibrary, addGameToLibrary } from '../../api/libraryApiCalls';
+import { removeGameFromWishlist, addGameToWishlist } from '../../api/wishlistApiCalls';
 
 const Last30Days = () => {
   const [games, setGames] = useState([]);
   const { user } = useContext(DataContext);
   const [library, setLibrary] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +31,15 @@ const Last30Days = () => {
     if (user && user.library) {
       setLibrary(user.library);
     }
+
+    if (user && user.wishlist) {
+      setWishlist(user.wishlist);
+    }
   }, [user]);
+
+  const gameInLibrary = (gameId) => {
+    return library.some((game) => game.gameId === gameId);
+  };
 
   const handleAddToLibrary = async (gameId) => {
     try {
@@ -48,8 +59,26 @@ const Last30Days = () => {
     }
   };
 
-  const gameInLibrary = (gameId) => {
-    return library.some((game) => game.gameId === gameId);
+  const gameInWishlist = (gameId) => {
+    return wishlist.some((game) => game.gameId === gameId);
+  };
+
+  const handleToggleWishlist = async (gameId) => {
+    try {
+      if (gameInWishlist(gameId)) {
+        await removeGameFromWishlist(gameId);
+        setWishlist((prevWishlist) =>
+          prevWishlist.filter((game) => game.gameId !== gameId)
+        );
+      } else {
+        const game = games.find((game) => game.id === gameId);
+        const { id, name, background_image } = game;
+        await addGameToWishlist(id, name, background_image);
+        setWishlist((prevWishlist) => [...prevWishlist, { gameId, name, background_image }]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -77,6 +106,12 @@ const Last30Days = () => {
               className={styles.addButton}
             >
               {gameInLibrary(game.id) ? <FaMinus /> : <FaPlus />}
+            </button>
+            <button
+              onClick={() => handleToggleWishlist(game.id)}
+              className={styles.addButton}
+            >
+              {gameInWishlist(game.id) ? <IoHeartSharp /> : <IoHeartOutline />}
             </button>
           </div>
         ))}
