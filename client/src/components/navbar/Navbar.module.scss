@@ -1,32 +1,48 @@
 .nav {
-    background-color: black;
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
-  
-    .search_bar {
-      flex-grow: 1;
-      margin-right: 1rem;
-      width: 500px;
-    }
-  
-    a {
-      color: #007bff;
-      text-decoration: none;
-      margin-right: 1rem;
-  
-      &:hover {
-        color: #0056b3;
-      }
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  color: whitesmoke;
+
+  .search_bar {
+    flex-grow: 1;
+    margin-right: 1rem;
+    width: 500px;
+  }
+
+  a {
+    color: #007bff;
+    text-decoration: none;
+    margin-right: 1rem;
+
+    &:hover {
+      color: #0056b3;
     }
   }
-  
+
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    padding: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    display: none;
+    z-index: 1;
+  }
+
+  .nav:hover .dropdown {
+    display: block;
+  }
+
   .logout {
     cursor: pointer;
     color: #dc3545;
   }
-  
+
   .profile_circle {
     height: 40px;
     width: 40px;
@@ -38,9 +54,9 @@
     justify-content: center;
     margin-right: 1rem;
   }
-  
+
   .notification_icon {
     cursor: pointer;
     color: #28a745;
   }
-  
+}

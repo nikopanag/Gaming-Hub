@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import { getLast30DaysReleases } from '../../api/gameApiCalls';
-import styles from './last30Days.module.scss';
+import styles from './last30days.module.scss';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { IoHeartOutline, IoHeartSharp } from 'react-icons/io5';
 import { DataContext } from '../../data/DataContext';
