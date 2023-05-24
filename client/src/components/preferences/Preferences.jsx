@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { updatePreferences } from '../api/userApiCalls';
+import { updatePreferences } from '../../api/userApiCalls';
 
 const Preferences = () => {
   const [selectedGenres, setSelectedGenres] = useState([]);

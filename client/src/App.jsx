@@ -1,31 +1,30 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/navbar/Navbar';
-import Login from './components/navbar/Login';
-import Register from './components/navbar/Register';
-import Preferences from './components/Preferences';
-import Dashboard from './components/dashboard/Dashboard';
-import TitlePage from './components/titlePage/titlePage';
-/* import Test from './components/Test';  */
 
-const App = () => {
+import NavBar from './components/navbar/Navbar';
+import { BrowserRouter as Router } from "react-router-dom";
+
+import RouterComponent from './routes/Routes';
+import Footer from './components/footer/Footer';
+//import { useLocation } from 'react-router-dom';
+
+function App() {
+ // const currentRoute = useLocation().pathname;
+  //const excludedRoutes = ['/register', '/login'];
+ // const shouldRenderFooter = !excludedRoutes.includes(currentRoute);
 
   return (
-    <Router>
-      <Navbar />
-      {/* <Test/> */}
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/preferences" element={<Preferences />} />
-        <Route path="/dashboard/*" element={<Dashboard />} />
-        <Route path='/games/:id' element={<TitlePage />} />
-        {/* other routes */}
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <NavBar />
+        <RouterComponent />
+        {/* {shouldRenderFooter && <Footer />} */}
+        <Footer></Footer>
+      </Router>
+    </>
   );
-};
+}
 
 export default App;
+
 
 
 
