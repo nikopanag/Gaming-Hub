@@ -6,7 +6,6 @@ const GameSchema = new mongoose.Schema({
   gameId: {
     type: Number,
     required: true,
-    unique: true,
   },
   title: {
     type: String,
@@ -51,7 +50,7 @@ const UserSchema = new mongoose.Schema(
       type: [String],
       default: [],
     },
-    library: {
+    userCollection: {
       type: [GameSchema],
       default: [],
     },
@@ -141,8 +140,8 @@ UserSchema.methods.getPublicFields = function () {
     email: this.email,
     role: this.role,
     avatarURL: this.avatarURL,
-    genres: this.genres,
-    library: this.library,
+    preferences: this.preferences,
+    userCollection: this.userCollection,
     wishlist: this.wishlist,
   };
 };

@@ -28,8 +28,8 @@ const Last30Days = () => {
   }, []);
 
   useEffect(() => {
-    if (user && user.library) {
-      setLibrary(user.library);
+    if (user && user.userCollection) {
+      setLibrary(user.userCollection);
     }
 
     if (user && user.wishlist) {

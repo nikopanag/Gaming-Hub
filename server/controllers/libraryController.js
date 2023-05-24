@@ -11,13 +11,21 @@ exports.addGameToLibrary = async (req, res, next) => {
       return res.status(404).json({ error: "User not found" });
     }
 
+    const gameExists = user.userCollection.find(
+      (game) => game.gameId === gameId
+    );
+
+    if (gameExists) {
+      return res.status(400).json({ error: "Game already in library" });
+    }
+
     const newGame = {
       gameId,
       title,
       image,
     };
 
-    user.library.push(newGame);
+    user.userCollection.push(newGame);
     await user.save();
 
     res.status(200).json({ message: "Game added to library successfully" });
@@ -28,29 +36,30 @@ exports.addGameToLibrary = async (req, res, next) => {
 
 // Remove a game from the user's library
 exports.removeGameFromLibrary = async (req, res, next) => {
-    try {
-      const { _id } = req.user;
-      const { gameId } = req.body;
-  
-      const user = await User.findById(_id);
-      if (!user) {
-        return res.status(404).json({ error: "User not found" });
-      }
-  
-      const gameIndex = user.library.findIndex((game) => game.gameId === gameId);
-      if (gameIndex === -1) {
-        return res.status(404).json({ error: "Game not found in library" });
-      }
-  
-      user.library.splice(gameIndex, 1);
-      await user.save();
-  
-      res.status(200).json({ message: "Game removed from library successfully" });
-    } catch (error) {
-      next(error);
+  try {
+    const { _id } = req.user;
+    const { gameId } = req.body;
+
+    const user = await User.findById(_id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
     }
-  };
-  
+
+    const gameIndex = user.userCollection.findIndex(
+      (game) => game.gameId === gameId
+    );
+    if (gameIndex === -1) {
+      return res.status(404).json({ error: "Game not found in library" });
+    }
+
+    user.userCollection.splice(gameIndex, 1);
+    await user.save();
+
+    res.status(200).json({ message: "Game removed from library successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
 
 // Get the user's library
 exports.getUserLibrary = async (req, res, next) => {
@@ -62,7 +71,7 @@ exports.getUserLibrary = async (req, res, next) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    const library = user.library;
+    const library = user.userCollection;
 
     res.status(200).json({ library });
   } catch (error) {
@@ -71,7 +80,7 @@ exports.getUserLibrary = async (req, res, next) => {
 };
 
 // Update a game in the user's library
-exports.updateGameInLibrary = async (req, res,next) => {
+exports.updateGameInLibrary = async (req, res, next) => {
   try {
     const { _id } = req.user;
     const { gameId, title, image, platforms } = req.body;
@@ -88,10 +97,12 @@ exports.updateGameInLibrary = async (req, res,next) => {
       return res.status(404).json({ error: "Game not found in library" });
     }
 
-    user.library[gameIndex].title = title || user.library[gameIndex].title;
-    user.library[gameIndex].image = image || user.library[gameIndex].image;
-    user.library[gameIndex].platforms =
-      platforms || user.library[gameIndex].platforms;
+    user.userCollection[gameIndex].title =
+      title || user.userCollection[gameIndex].title;
+    user.userCollection[gameIndex].image =
+      image || user.userCollection[gameIndex].image;
+    user.userCollection[gameIndex].platforms =
+      platforms || user.userCollection[gameIndex].platforms;
 
     await user.save();
 
@@ -99,4 +110,4 @@ exports.updateGameInLibrary = async (req, res,next) => {
   } catch (error) {
     next(error);
   }
-}
+};
