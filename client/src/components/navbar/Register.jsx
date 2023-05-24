@@ -12,8 +12,11 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       const response = await signup(usersDispatch, data);
-      if (response.status === 200) {
+      /* console.log(response) */
+      if (response.statusCode === 201) {
+        /* console.log("Before dispatch"); */
         usersDispatch({ type: 'LOGIN', payload: response.data });
+        /* console.log("After dispatch"); */
         navigate('/preferences');
       }
     } catch (error) {
