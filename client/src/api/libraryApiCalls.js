@@ -20,3 +20,12 @@ export const removeGameFromLibrary = async (gameId) => {
     throw error.response.data;
   }
 };
+
+export const getUserLibrary = async () => {
+  try {
+    const response = await axios.get(`/library`);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+}
