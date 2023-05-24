@@ -11,8 +11,9 @@ import Last30Days from "../components/dashboard/Last30Days";
 import HotThisWeek from "../components/dashboard/HotThisWeek";
 import Library from "../components/dashboard/Library";
 import Wishlist from "../components/dashboard/Wishlist";
-//import Profile from "../components/userProfile/UserProfile";
+import Profile from "../components/profile/Profile";
 import Preferences from "../components/preferences/Preferences";
+import Settings from "../components/profile/Settings";
 
 const RouterComponent = () => {
   return (
@@ -27,9 +28,10 @@ const RouterComponent = () => {
       <Route path="/dashboard/last-30-days" element={<Last30Days />} />
       <Route path="/dashboard/hot-this-week" element={<HotThisWeek />} />
       <Route path="/library" element={<Library />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/preferences" element={<Preferences />} />
-
+      <Route path="/wishlist" element={<Wishlist />} />
+      <Route path="/preferences" element={<Preferences />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/settings" element={<Settings />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
