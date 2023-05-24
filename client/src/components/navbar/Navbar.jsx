@@ -4,11 +4,12 @@ import { DataContext } from "../../data/DataContext";
 import Logout from "./Logout";
 import ProfileCircle from "./ProfileCircle";
 import SearchBar from "./SearchBar";
-import styles from './Navbar.module.scss'
+import styles from "./Navbar.module.scss";
 
 const Navbar = () => {
   const { isUserLoggedIn, usersDispatch, user } = useContext(DataContext);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [isProfileDropdownVisible, setIsProfileDropdownVisible] = useState(false);
 
   const handleMouseEnter = () => {
     setIsDropdownVisible(true);
@@ -18,7 +19,15 @@ const Navbar = () => {
     setIsDropdownVisible(false);
   };
 
-  const dropdownStyles = {
+  const handleProfileMouseEnter = () => {
+    setIsProfileDropdownVisible(true);
+  };
+
+  const handleProfileMouseLeave = () => {
+    setIsProfileDropdownVisible(false);
+  };
+
+  const dashboardDropdownStyles = {
     position: "absolute",
     top: "100%",
     left: 0,
@@ -30,6 +39,19 @@ const Navbar = () => {
     flexDirection: "column",
     zIndex: 1,
   };
+
+  const profileDropdownStyles = {
+  position: "absolute",
+  top: "100%",
+  right: 0,
+  background: "#fff",
+  padding: "8px",
+  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+  borderRadius: "4px",
+  display: isProfileDropdownVisible ? "flex" : "none",
+  flexDirection: "column",
+  zIndex: 1,
+};
 
   return (
     <nav className={styles.nav}>
@@ -48,14 +70,19 @@ const Navbar = () => {
 
           <Link to="/dashboard" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ position: "relative" }}>
             Dashboard
-            <div style={dropdownStyles}>
+            <div style={dashboardDropdownStyles}>
               <Link to="/library">Library</Link>
               <Link to="/wishlist">Wishlist</Link>
             </div>
           </Link>
 
-          <ProfileCircle user={user} />
-          <Logout usersDispatch={usersDispatch} />
+          <div onMouseEnter={handleProfileMouseEnter} onMouseLeave={handleProfileMouseLeave} style={{ position: "relative" }}>
+            <ProfileCircle user={user} />
+            <div style={profileDropdownStyles}>
+              <Link to="/settings">Settings</Link>
+              <Logout usersDispatch={usersDispatch} />
+            </div>
+          </div>
         </>
       )}
     </nav>

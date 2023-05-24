@@ -1,13 +1,20 @@
 import { useContext } from 'react';
 import { DataContext } from '../../data/DataContext';
+import { useNavigate } from "react-router-dom";
+
 import styles from './Navbar.module.scss';
 
 const ProfileCircle = () => {
   const { user } = useContext(DataContext);
-  const userInitial = user?.username?.[0]?.toUpperCase();
+    const navigate = useNavigate();
 
+  const userInitial = user?.username?.[0]?.toUpperCase();
+  const goToProfile = () => {
+    navigate("/profile");
+
+  };
   return (
-    <div className={styles.profile_circle}>
+    <div onClick={goToProfile} className={styles.profile_circle}>
       {userInitial}
     </div>
   );
