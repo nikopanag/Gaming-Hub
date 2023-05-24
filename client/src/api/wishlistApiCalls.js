@@ -20,3 +20,12 @@ export const removeGameFromWishlist = async (gameId) => {
     throw error.response.data;
   }
 };
+
+export const getUserWishlist = async () => {
+  try {
+    const response = await axios.get(`/wishlist`);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+}
