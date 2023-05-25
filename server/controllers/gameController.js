@@ -1,5 +1,6 @@
 const axios = require("axios");
 require("dotenv").config();
+const User = require("../models/userModel");
 
 exports.searchGames = async (req, res, next) => {
   const { title } = req.query;
@@ -92,22 +93,37 @@ exports.getNextWeekReleases = async (req, res, next) => {
     const nextWeekMonth = date.getMonth() + 1;
     const nextWeekYear = date.getFullYear();
 
-    const currentDate = `${currentYear}-${String(currentMonth).padStart(2, '0')}-${String(currentDay).padStart(2, '0')}`;
-    console.log(currentDate)
-    const nextWeekDate = `${nextWeekYear}-${String(nextWeekMonth).padStart(2, '0')}-${String(nextWeekDay).padStart(2, '0')}`;
+    const currentDate = `${currentYear}-${String(currentMonth).padStart(
+      2,
+      "0"
+    )}-${String(currentDay).padStart(2, "0")}`;
+    console.log(currentDate);
+    const nextWeekDate = `${nextWeekYear}-${String(nextWeekMonth).padStart(
+      2,
+      "0"
+    )}-${String(nextWeekDay).padStart(2, "0")}`;
 
-    const response = await axios.get(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&dates=${currentDate},${nextWeekDate}`);
+    const response = await axios.get(
+      `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&dates=${currentDate},${nextWeekDate}`
+    );
     res.json(response.data);
   } catch (error) {
     next(error);
   }
 };
 
-exports.getReleasesByDate = async (req, res, next) => {
+exports.getReleasesByMonth = async (req, res, next) => {
   try {
-    const { date } = req.query;
-    console.log(date)
-    const response = await axios.get(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&dates=${date},${date}`);
+    const { month, year } = req.query;
+
+    const startOfMonth = new Date(year, month - 1, 1)
+      .toISOString()
+      .split("T")[0];
+    const endOfMonth = new Date(year, month, 0).toISOString().split("T")[0];
+
+    const response = await axios.get(
+      `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&dates=${startOfMonth},${endOfMonth}`
+    );
     res.json(response.data);
   } catch (error) {
     next(error);
@@ -116,27 +132,39 @@ exports.getReleasesByDate = async (req, res, next) => {
 
 exports.searchGameById = async (req, res, next) => {
   try {
-    const response = await axios.get(`https://api.rawg.io/api/games/${req.params.id}?key=${process.env.RAWG_API_KEY}`);
+    const response = await axios.get(
+      `https://api.rawg.io/api/games/${req.params.id}?key=${process.env.RAWG_API_KEY}`
+    );
     res.json(response.data);
-  } catch (error) {
-    next(error)
-  }
-}
-
-exports.getGameDeals = async (req, res, next) => {
-  /* console.log('getGameDeals called'); */
-  try {
-    const gameTitle = req.query.gameTitle;
-    console.log(gameTitle);
-
-    const response = await axios.get(`https://api.isthereanydeal.com/v01/game/prices/?key=${process.env.ISTHEREANYDEAL_API_KEY}&plains=${gameTitle}`);
-    console.log(response.data.data);
-
-    const deals = response.data.data[gameTitle].list;
-    
-    res.json(deals);
   } catch (error) {
     next(error);
   }
 };
+
+exports.getGenreBasedRecommendations = async (req, res, next) => {
+  console.log("function running");
+  try {
+    const { _id } = req.user;
+    console.log('User:', req.user)
+
+    const user = await User.findById(_id);
+    const genres = user.preferences.map((genre) => genre);
+    console.log('Genres:', genres)
+
+    let recommendations = [];
+    for(let i = 0; i < genres.length; i++) {
+      const url = `https://api.rawg.io/api/games?genres=${genres[i]}&key=${process.env.RAWG_API_KEY}&page_size=5`;
+      console.log('URL:', url);
+      const response = await axios.get(url);
+      recommendations = [...recommendations, ...response.data.results];
+    }
+
+    res.json(recommendations);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
+
+
 
