@@ -14,6 +14,7 @@ import Wishlist from "../components/dashboard/Wishlist";
 import Profile from "../components/profile/Profile";
 import Preferences from "../components/preferences/Preferences";
 import Settings from "../components/profile/Settings";
+import ReleaseCalendar from "../components/dashboard/ReleaseCalendar";
 
 const RouterComponent = () => {
   return (
@@ -22,7 +23,7 @@ const RouterComponent = () => {
       <Route path="/explore" element={<ExplorePage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/title/:category/:id" element={<TitlePage />} />
+      <Route path="/games/:id" element={<TitlePage />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/dashboard/next" element={<NextWeek />} />
       <Route path="/dashboard/last-30-days" element={<Last30Days />} />
@@ -32,6 +33,7 @@ const RouterComponent = () => {
       <Route path="/preferences" element={<Preferences />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/settings" element={<Settings />} />
+      <Route path="/release-calendar" element={<ReleaseCalendar />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

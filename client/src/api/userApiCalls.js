@@ -69,12 +69,12 @@ export const updateUser = async (dispatch, data) => {
   }
 };
 
-export const updatePreferences = async (selectedGenres) => {
-    try {
-      const response = await axios.put('/me/preferences', { preferences: selectedGenres });
-      return response.data;
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  };
+export const updatePreferences = async (genreIds) => {
+  try {
+    const response = await axios.put('/me/preferences', { preferences: genreIds });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

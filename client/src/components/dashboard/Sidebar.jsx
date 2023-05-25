@@ -1,8 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { DataContext } from "../../data/DataContext";
-import Library from "./Library";
-import Wishlist from "./Wishlist";
 
 const Sidebar = () => {
   const { user } = useContext(DataContext);
@@ -12,12 +10,12 @@ const Sidebar = () => {
       <ul>
         <li>
           <NavLink to="/library" className={({ isActive }) => (isActive ? "active" : "")}>
-            <Library />{" "}
+            Library
           </NavLink>
         </li>
         <li>
           <NavLink to="/wishlist" className={({ isActive }) => (isActive ? "active" : "")}>
-            <Wishlist />
+            Wishlist
           </NavLink>
         </li>
       </ul>
@@ -36,6 +34,11 @@ const Sidebar = () => {
         <li>
           <NavLink to="/dashboard/next" className={({ isActive }) => (isActive ? "active" : "")}>
             Next Week
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/release-calendar" className={({ isActive }) => (isActive ? "active" : "")}>
+            Release Calendar
           </NavLink>
         </li>
       </ul>

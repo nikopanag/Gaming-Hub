@@ -43,9 +43,9 @@ export const getUpcomingGamesNextWeek = async () => {
   }
 };
 
-export const getReleaseCalendar = async (date) => {
+export const getReleaseCalendar = async ({ month, year }) => {
   try {
-    const response = await axios.get(`/games/release-calendar?date=${date}`);
+    const response = await axios.get(`/games/release-calendar?month=${month}&year=${year}`);
     return response.data.results;
   } catch (error) {
     console.error('Error fetching releases:', error);
@@ -63,4 +63,14 @@ export const getGameById = async (id) => {
   }
 };
 
+export const getGenreBasedRecommendations = async () => {
+  try {
+    const response = await axios.get('/games/recommendations');
+    console.log('Recommendations:', response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error)
+    throw error;
+  }
+};
 

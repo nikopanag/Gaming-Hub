@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getUpcomingGamesNextWeek } from "../../api/gameApiCalls";
 import { Link } from "react-router-dom";
+import Sidebar from "./Sidebar";
 
 const NextWeek = () => {
   const [games, setGames] = useState([]);
@@ -20,6 +21,7 @@ const NextWeek = () => {
 
   return (
     <div>
+      <Sidebar />
       <h1>Releasing Next Week</h1>
       {games && games.length > 0 ? (
         games.map((game) => (

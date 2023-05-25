@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getHotGamesThisWeek } from '../../api/gameApiCalls';
 import { Link } from 'react-router-dom';
+import Sidebar from './Sidebar';
 
 const HotThisWeek = () => {
     const [games, setGames] = useState([]);
@@ -20,6 +21,7 @@ const HotThisWeek = () => {
 
     return (
         <div>
+            <Sidebar />
             <h1>Hot This Week</h1>
             <div >
                 {games.map((game) => (
