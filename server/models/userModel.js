@@ -47,7 +47,7 @@ const UserSchema = new mongoose.Schema(
       default: "user",
     },
     preferences: {
-      type: [String],
+      type: [Number],
       default: [],
     },
     userCollection: {

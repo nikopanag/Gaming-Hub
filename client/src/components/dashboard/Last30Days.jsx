@@ -7,6 +7,7 @@ import { IoHeartOutline, IoHeartSharp } from 'react-icons/io5';
 import { DataContext } from '../../data/DataContext';
 import { removeGameFromLibrary, addGameToLibrary } from '../../api/libraryApiCalls';
 import { removeGameFromWishlist, addGameToWishlist } from '../../api/wishlistApiCalls';
+import Sidebar from './Sidebar';
 
 const Last30Days = () => {
   const [games, setGames] = useState([]);
@@ -83,6 +84,7 @@ const Last30Days = () => {
 
   return (
     <div>
+      <Sidebar />
       <h2>Last 30 Days Releases</h2>
       <div className={styles.cardContainer}>
         {games.map((game) => (

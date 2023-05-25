@@ -58,6 +58,7 @@ exports.updateUserAvatar = async (req, res, next) => {
 
 exports.updatePreferences = async (req, res) => {
   const { preferences } = req.body;
+  console.log('Received genreIds:', preferences);
 
   try {
     // find the user and update preferences
@@ -71,9 +72,13 @@ exports.updatePreferences = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
+    console.log('Updated user:', user);
+
     res.status(200).json(user);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+

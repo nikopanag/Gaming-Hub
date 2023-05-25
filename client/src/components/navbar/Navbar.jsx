@@ -41,17 +41,17 @@ const Navbar = () => {
   };
 
   const profileDropdownStyles = {
-  position: "absolute",
-  top: "100%",
-  right: 0,
-  background: "#fff",
-  padding: "8px",
-  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
-  borderRadius: "4px",
-  display: isProfileDropdownVisible ? "flex" : "none",
-  flexDirection: "column",
-  zIndex: 1,
-};
+    position: "absolute",
+    top: "100%",
+    right: 0,
+    background: "#fff",
+    padding: "8px",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+    borderRadius: "4px",
+    display: isProfileDropdownVisible ? "flex" : "none",
+    flexDirection: "column",
+    zIndex: 1,
+  };
 
   return (
     <nav className={styles.nav}>
@@ -68,13 +68,14 @@ const Navbar = () => {
           <SearchBar />
           <Link to="/explore">Explore</Link>
 
-          <Link to="/dashboard" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ position: "relative" }}>
-            Dashboard
+          <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ position: "relative" }}>
+            <Link to="/dashboard">Dashboard</Link>
             <div style={dashboardDropdownStyles}>
               <Link to="/library">Library</Link>
               <Link to="/wishlist">Wishlist</Link>
             </div>
-          </Link>
+          </div>
+
 
           <div onMouseEnter={handleProfileMouseEnter} onMouseLeave={handleProfileMouseLeave} style={{ position: "relative" }}>
             <ProfileCircle user={user} />
