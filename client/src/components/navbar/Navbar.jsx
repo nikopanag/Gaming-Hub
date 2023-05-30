@@ -5,6 +5,7 @@ import Logout from "./Logout";
 import ProfileCircle from "./ProfileCircle";
 import SearchBar from "./SearchBar";
 import styles from "./Navbar.module.scss";
+import logo from "../../../assets/logo.png";
 
 const Navbar = () => {
   const { isUserLoggedIn, usersDispatch, user } = useContext(DataContext);
@@ -57,14 +58,30 @@ const Navbar = () => {
     <nav className={styles.nav}>
       {!isUserLoggedIn ? (
         <>
-          <h1>Logo</h1>
-          <Link to="/explore">Explore</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+          <div className={styles.logo}>
+            <Link to="/">
+              <img src={logo} alt="logo" />
+            </Link>
+          </div>
+          <div className={styles.link_items}>
+            <Link className={styles.link} to="/explore">
+              Explore
+            </Link>
+            <Link className={styles.link} to="/login">
+              Login
+            </Link>
+            <Link className={styles.link} to="/register">
+              Register
+            </Link>
+          </div>
         </>
       ) : (
         <>
-          <h1>Logo</h1>
+          <div className={styles.logo}>
+            <Link to="/">
+              <img src={logo} alt="logo" />
+            </Link>
+          </div>
           <SearchBar />
           <Link to="/explore">Explore</Link>
 
@@ -75,7 +92,6 @@ const Navbar = () => {
               <Link to="/wishlist">Wishlist</Link>
             </div>
           </div>
-
 
           <div onMouseEnter={handleProfileMouseEnter} onMouseLeave={handleProfileMouseLeave} style={{ position: "relative" }}>
             <ProfileCircle user={user} />
