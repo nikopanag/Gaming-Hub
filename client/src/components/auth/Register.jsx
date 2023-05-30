@@ -4,8 +4,7 @@ import { useContext } from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { signup } from "../../api/userApiCalls";
-import styles from './Register.module.scss'
-
+import styles from "./Register.module.scss";
 
 const Register = () => {
   const { usersDispatch, isUserLoggedIn } = useContext(DataContext);
@@ -35,14 +34,11 @@ const Register = () => {
 
   return (
     <div className={styles.register_container}>
-      <div className={styles.img_container}>
-       
-      </div>
       <div className={styles.register}>
-        <h1>Please Register bellow </h1>
-      
-    
+        <h1>Unlock Your Potential</h1>
+        <p>Join the Realm of Champions</p>
         <form onSubmit={handleSubmit(onSubmit)}>
+          
           <input
             name="username"
             placeholder="Username"
@@ -50,25 +46,7 @@ const Register = () => {
               required: "Please put your first name.",
             })}
           />
-          <div className={styles.error_message}>{errors.firstName && <span>{errors.firstName.message}</span>}</div>
-
-          <input
-            name="firstName"
-            placeholder="First name"
-            {...register("firstName", {
-              required: "Please put your first name.",
-            })}
-          />
-          <div className={styles.error_message}>{errors.firstName && <span>{errors.firstName.message}</span>}</div>
-
-          <input
-            name="lastName"
-            placeholder="Last name"
-            {...register("lastName", {
-              required: "Please put your last name.",
-            })}
-          />
-          <div className={styles.error_message}>{errors.lastName && <span>{errors.lastName.message}</span>}</div>
+          <div className={styles.error_message}>{errors.username && <span>{errors.username.message}</span>}</div>
 
           <input
             name="email"
@@ -105,11 +83,7 @@ const Register = () => {
           </div>
         </form>
         <div className={styles.connect}>
-        
-
-          <div className={styles.icons}>
-          
-          </div>
+          <div className={styles.icons}></div>
         </div>
         <div className={styles.login}>
           <p>

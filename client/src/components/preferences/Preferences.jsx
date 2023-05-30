@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { updatePreferences } from '../../api/userApiCalls';
-import img from "../../../public/download.png"
+import img from '../../../assets/bearmaid.jpg'
 import styles from "./Preferences.module.scss"
 
 const Preferences = () => {
