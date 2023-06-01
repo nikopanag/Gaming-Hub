@@ -1,8 +1,23 @@
 .footer_container {
   color: whitesmoke;
-  position: fixed;
-  left: 0;
-  bottom: 0;
   width: 100%;
   text-align: center;
+  height: 200px;
+  justify-content: end;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 1rem;
+  background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.205), rgba(31, 3, 58, 0.73)), url("../../../assets/2610702.jpg");
+  .icons {
+    font-size: 2rem;
+    padding: 1rem;
+    .icons_link {
+      padding: 0.5rem;
+      cursor: pointer;
+      &:hover {
+ color: #9d00ff;
+transform: scale(1.1);      }
+    }
+  }
 }
