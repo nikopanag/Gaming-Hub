@@ -18,11 +18,12 @@
     $backgroundOpacity: 0.2;
     $formPadding: 2rem;
 
-    h1{
-        font-size: 2rem;
+    h1 {
+      font-size: 2rem;
     }
-    p{
-        padding: 2rem;
+    p {
+      padding: 2rem;
+      font-size: 1.2rem;
     }
 
     form {
@@ -30,47 +31,85 @@
       backdrop-filter: blur($blurAmount);
       border-radius: 8px;
       padding: $formPadding;
-      width: 350px;
-      height: 300px;
+      width: 300px;
+      height: 320px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
- input {
-        padding: 1rem;
-        margin-bottom: 1.5rem;
+
+      .input {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
         border: none;
-        border-bottom: 1px solid #b7c0c9;
         width: 250px;
 
-        background: transparent;
-        &:focus {
-          outline: none;
+        input {
+          padding: 0.5rem;
+          border: none;
+          border-bottom: 1px solid #b7c0c9;
+          background: transparent;
+          &:focus {
+            outline: none;
+          }
         }
-        &::placeholder{
-            color: whitesmoke;
+        label {
+          position: absolute;
+          color: #2f0322;
         }
-      } 
-
+      }
+      input:focus + label {
+        top: -40%;
+        font-size: 0.8rem;
+      }
 
       .submit {
         input {
           background-color: #2f0322;
           color: whitesmoke;
           border: none;
-          border-radius: 3px;
+          border-radius: 8px;
           cursor: pointer;
-          height: 45px;
+          height: 40px;
+          width: 150px;
+          font-size: 1rem;
+          margin-top: 2rem;
+        }
+        input:focus + label {
+          top: 0;
+          font-size: 10px;
         }
       }
 
-     
+      .error_message {
+        color: rgb(237, 235, 238);
+        font-size: 0.8rem;
+        padding-left: 1.5rem;
+        display: flex;
+        align-self: start;
+      }
     }
-    .login{
-        p{
-            padding: 2rem;
+    .login {
+      p {
+        padding: 2rem;
+        .link {
+          color: whitesmoke;
+          &:hover {
+            border: 1px solid whitesmoke;
+            border-radius: 8px;
+            padding: 0 0.5rem;
+            background-color: whitesmoke;
+            color: #2f0322;
+            text-decoration: none;
+          }
         }
+      }
     }
   }
 }
