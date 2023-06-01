@@ -38,44 +38,50 @@ const Register = () => {
         <h1>Unlock Your Potential</h1>
         <p>Join the Realm of Champions</p>
         <form onSubmit={handleSubmit(onSubmit)}>
-          
-          <input
-            name="username"
-            placeholder="Username"
-            {...register("username", {
-              required: "Please put your first name.",
-            })}
-          />
-          <div className={styles.error_message}>{errors.username && <span>{errors.username.message}</span>}</div>
+          <div className={styles.input}>
+            <input
+              name="username"
+              {...register("username", {
+                required: "Enter your username",
+              })}
+            />
+            <label htmlFor="username">Username</label>
+          </div>
 
-          <input
-            name="email"
-            placeholder="Email"
-            {...register("email", {
-              required: "Enter your password",
-              minLength: {
-                value: 8,
-                message: "Password must be at least 8 characters",
-              },
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Email is invalid. Please fix",
-              },
-            })}
-          />
+          <div className={styles.error_message}>{errors.username && <span>{errors.username.message}</span>}</div>
+          <div className={styles.input}>
+            <input
+              name="email"
+              {...register("email", {
+                required: "Enter your email",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Email is invalid. Please fix",
+                },
+              })}
+            />
+            <label htmlFor="email">Email</label>
+          </div>
           <div className={styles.error_message}>{errors.email && <span>{errors.email.message}</span>}</div>
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            {...register("password", {
-              required: "Required",
-              minLength: {
-                value: 5,
-                message: "Password must be at least 5 characters",
-              },
-            })}
-          />
+          <div className={styles.input}>
+            <input
+              name="password"
+              type="password"
+              {...register("password", {
+                required: "Enter your password",
+                minLength: {
+                  value: 5,
+                  message: "Password must be at least 5 characters",
+                },
+              })}
+            />
+            <label htmlFor="password">Password</label>
+          </div>
+
           <div className={styles.error_message}>{errors.password && <span>{errors.password.message}</span>}</div>
 
           <div className={styles.submit}>
@@ -87,7 +93,7 @@ const Register = () => {
         </div>
         <div className={styles.login}>
           <p>
-            Already have an account? <Link to="/login">Login</Link>
+            Already have an account? <Link className={styles.link} to="/login">Login</Link>
           </p>
         </div>
       </div>
