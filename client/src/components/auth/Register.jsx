@@ -41,16 +41,19 @@ const Register = () => {
           <div className={styles.input}>
             <input
               name="username"
+            placeholder="Username"
               {...register("username", {
                 required: "Enter your username",
               })}
             />
+            
             <label htmlFor="username">Username</label>
           </div>
 
           <div className={styles.error_message}>{errors.username && <span>{errors.username.message}</span>}</div>
           <div className={styles.input}>
             <input
+              placeholder="Email"
               name="email"
               {...register("email", {
                 required: "Enter your email",
@@ -71,6 +74,7 @@ const Register = () => {
             <input
               name="password"
               type="password"
+            placeholder="Password"
               {...register("password", {
                 required: "Enter your password",
                 minLength: {
