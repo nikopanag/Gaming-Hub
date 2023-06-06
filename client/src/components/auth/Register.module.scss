@@ -38,11 +38,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-
       .input {
         position: relative;
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
         flex-direction: column;
         margin-top: 1.5rem;
@@ -52,62 +49,92 @@
 
         input {
           padding: 0.5rem;
+          display: block;
           border: none;
           border-bottom: 1px solid #b7c0c9;
           background: transparent;
-          &:focus {
-            outline: none;
+          outline: 0;
+          transition: border-color 0.2s;
+
+          &::placeholder {
+            color: transparent;
           }
+     
+
+          &:focus {
+            padding-bottom: 10px;
+            font-weight: 700;
+            border-width: 2px;
+            border-image: linear-gradient(to right, #8e54e9, #4776e6);
+            border-image-slice: 1;
+          }
+
+          &:focus ~ label,
+          &.active ~ label {
+            position: absolute;
+            top: -40%;
+            display: block;
+            transition: 0.2s;
+            font-size: 0.8rem;
+            color: #b7c0c9;
+          }
+          &:required,
+          &:invalid {
+            box-shadow: none;
+          }
+ 
         }
+
         label {
           position: absolute;
-          color: #2f0322;
-        }
-      }
-      input:focus + label {
-        top: -40%;
-        font-size: 0.8rem;
-      }
-
-      .submit {
-        input {
-          background-color: #2f0322;
-          color: whitesmoke;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          height: 40px;
-          width: 150px;
+          color: #320338;
+          top: -30%;
+          display: block;
+          transition: 0.2s;
           font-size: 1rem;
-          margin-top: 2rem;
+          transition: top 0.2s, font-size 0.2s;
+          pointer-events: none;
         }
-        input:focus + label {
-          top: 0;
-          font-size: 10px;
-        }
-      }
-
-      .error_message {
-        color: rgb(237, 235, 238);
-        font-size: 0.8rem;
-        padding-left: 1.5rem;
-        display: flex;
-        align-self: start;
       }
     }
-    .login {
-      p {
-        padding: 2rem;
-        .link {
-          color: whitesmoke;
-          &:hover {
-            border: 1px solid whitesmoke;
-            border-radius: 8px;
-            padding: 0 0.5rem;
-            background-color: whitesmoke;
-            color: #2f0322;
-            text-decoration: none;
-          }
+
+    .submit {
+      input {
+        background-color:  #320338;
+        color: whitesmoke;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        height: 40px;
+        width: 150px;
+        font-size: 1rem;
+        margin-top: 2rem;
+        &:hover {
+          background-image: linear-gradient(to right, #8e54e9, #4776e6);
+        }
+      }
+     
+    }
+
+    .error_message {
+      color: rgb(237, 235, 238);
+      font-size: 0.8rem;
+      padding-left: 1.5rem;
+      display: flex;
+      align-self: start;
+    }
+  }
+  .login {
+    p {
+      padding: 2rem;
+      .link {
+        color: whitesmoke;
+        &:hover {
+          border-radius: 8px;
+          padding: 0 0.5rem;
+          background-image: linear-gradient(to right, #8e54e9, #4776e6);
+          color: #2f0322;
+          text-decoration: none;
         }
       }
     }
