@@ -8,7 +8,9 @@
   align-items: center;
   flex-direction: column;
   padding-bottom: 1rem;
-  background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.205), rgba(31, 3, 58, 0.73)), url("../../../assets/2610702.jpg");
+ background: #330d38;
+    background: -webkit-linear-gradient(left, #150d38 0%, #0c0223 100%);
+    
   .icons {
     font-size: 2rem;
     padding: 1rem;

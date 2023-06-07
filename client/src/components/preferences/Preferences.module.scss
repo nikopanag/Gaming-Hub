@@ -1,15 +1,91 @@
-/* .preferences {
-    img {
-        position : relative;
+.preferences_container {
+    padding: 5rem 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+//  background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.205), rgba(31, 3, 58, 0.73)), url("../../../assets/17366.jpg");
+  // background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.205), rgba(31, 3, 58, 0.73)), url("../../../assets/5376788.jpg");
+     //   background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.205), rgba(31, 3, 58, 0.73)), url("../../../assets/abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner.jpg");
 
+ background: #330d38;
+    background: -webkit-linear-gradient(left, #150d38 0%, #0c0223 100%);    
+
+  color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+      align-items: center;
+    justify-content: center;
+    h2{
+        font-size: 2.5rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+      //  text-shadow: 2px 2px #9d00ff; 
     }
-    input {
-        display: none;
+  form {
+    display: flex;
+    flex-direction: column;
+
+    height: 60%;
+    width: 80%;
+    .genres_container {
+              align-items: center;
+    justify-content: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4rem;
+      .preferences {
+        display: flex;  
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 4rem;
+        font-size: 1.1rem;
+                    letter-spacing: 1.3px;
+
+        cursor: pointer;
+        label{
+            padding-top: 1rem;
+        }
+        &:hover {
+            color: #5b82df;
+        }
+        &.selected {
+          label {
+            color: #5b82df;
+            font-weight: 700;
+          }
+        }
+        img {
+          width: 200px;
+          height: 250px;
+          margin-bottom: 1rem;
+          object-fit: cover;
+          &:hover{
+              box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+              transform: scale(1.1);
+
+          }
+        }
+
+        input[type="checkbox"] {
+          display: none;
+        }
+      }
     }
-    label {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1;
+    button{
+        background-color:  #320338;
+        color: whitesmoke;
+        border-radius: 8px;
+        cursor: pointer;
+        height: 50px;
+        width: 170px;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        margin-top: 2rem;
+        align-self: center;
+border: 2px solid  #4776e6;
+        &:hover {
+          background-image: linear-gradient(to right, #8e54e9, #4776e6);
+        }
     }
-} */
+  }
+}

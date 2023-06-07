@@ -1,41 +1,41 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { updatePreferences } from '../../api/userApiCalls';
-import img from '../../../assets/bearmaid.jpg'
-import styles from "./Preferences.module.scss"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { updatePreferences } from "../../api/userApiCalls";
+import styles from "./Preferences.module.scss";
 
 const Preferences = () => {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const genres = [
-    { id: 4, name: 'Action' },
-    { id: 51, name: 'Indie' },
-    { id: 3, name: 'Adventure' },
-    { id: 5, name: 'RPG' },
-    { id: 10, name: 'Strategy' },
-    { id: 2, name: 'Shooter' },
-    { id: 40, name: 'Casual' },
-    { id: 14, name: 'Simulation' },
-    { id: 7, name: 'Puzzle' },
-    { id: 11, name: 'Arcade' },
-    { id: 83, name: 'Platformer' },
-    { id: 59, name: 'Massively Multiplayer' },
-    { id: 1, name: 'Racing' },
-    { id: 15, name: 'Sports' },
-    { id: 6, name: 'Fighting' },
-    { id: 19, name: 'Family' },
-    { id: 28, name: 'Board Games' },
-    { id: 34, name: 'Educational' },
-    { id: 17, name: 'Card' }
+    { id: 4, name: "Action", img: "../../../assets/action.webp" },
+    { id: 51, name: "Indie", img: "../../../assets/indie.png" },
+    { id: 3, name: "Adventure", img: "../../../assets/adventure.jpg" },
+    { id: 5, name: "RPG", img: "../../../assets/rpg.jpg" },
+    { id: 10, name: "Strategy", img: "../../../assets/strategy.jpg" },
+    { id: 2, name: "Shooter", img: "../../../assets/shooter.jpg" },
+    { id: 40, name: "Casual", img: "../../../assets/casual.jpg" },
+    { id: 14, name: "Simulation", img: "../../../assets/simulation.jpg" },
+    { id: 7, name: "Puzzle", img: "../../../assets/puzzle.jpg" },
+    { id: 11, name: "Arcade", img: "../../../assets/arcade.jpg" },
+    {
+      id: 83, name: "Platformer", img: "../../../assets/platformer.jpg" },
+    {
+      id: 59, name: "Massively Multiplayer", img: "../../../assets/massive.webp" },
+    { id: 1, name: "Racing", img: "../../../assets/racing.avif" },
+    { id: 15, name: "Sports", img: "../../../assets/sports.jpg" },
+    { id: 6, name: "Fighting", img: "../../../assets/fighting.jpg" },
+    { id: 19, name: "Family", img: "../../../assets/family.webp" },
+    { id: 28, name: "Board Games", img: "../../../assets/board.jpg" },
+    { id: 34, name: "Educational", img: "../../../assets/edu.jpg" },
+    { id: 17, name: "Card", img: "../../../assets/card.jpg" },
   ];
 
   const navigate = useNavigate();
 
-  const handleGenreChange = (e) => {
-    const genreId = parseInt(e.target.value);
-    if (e.target.checked) {
-      setSelectedGenres([...selectedGenres, genreId]);
+  const handleGenreChange = (genreId) => {
+    if (selectedGenres.includes(genreId)) {
+      setSelectedGenres(selectedGenres.filter((genre) => genre !== genreId));
     } else {
-      setSelectedGenres(selectedGenres.filter(genre => genre !== genreId));
+      setSelectedGenres([...selectedGenres, genreId]);
     }
   };
 
@@ -43,32 +43,33 @@ const Preferences = () => {
     e.preventDefault();
 
     try {
-      const genreIds = selectedGenres.map(genre => genre);
-      console.log(selectedGenres)
+      const genreIds = selectedGenres.map((genre) => genre);
+      console.log(selectedGenres);
       const response = await updatePreferences(genreIds);
       console.log(response);
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <div>
+    <div className={styles.preferences_container}>
       <h2>Select your preferences</h2>
       <form onSubmit={handleSubmit}>
-        {genres.map(genre => (
-          <div key={genre.id} className={styles.preferences}>
-            <img src={img}></img>
-            <input
-              type="checkbox"
-              id={genre.id}
-              value={genre.id}
-              onChange={handleGenreChange}
-            />
-            <label htmlFor={genre.id}>{genre.name}</label>
-          </div>
-        ))}
+        <div className={styles.genres_container}>
+          {genres.map((genre) => (
+            <div
+              key={genre.id}
+              className={`${styles.preferences} ${selectedGenres.includes(genre.id) ? styles.selected : ""}`}
+              onClick={() => handleGenreChange(genre.id)}
+            >
+              <img src={genre.img} alt={genre.name} />
+              <input type="checkbox" id={genre.id} value={genre.id} onChange={(e) => handleGenreChange(e, genre.id)} />
+              <label htmlFor={genre.id}>{genre.name}</label>
+            </div>
+          ))}
+        </div>
         <button type="submit">Submit</button>
       </form>
     </div>
@@ -76,4 +77,3 @@ const Preferences = () => {
 };
 
 export default Preferences;
-
