@@ -5,7 +5,7 @@ import Logout from "./Logout";
 import ProfileCircle from "./ProfileCircle";
 import SearchBar from "./SearchBar";
 import styles from "./Navbar.module.scss";
-import logo from "../../../assets/logo.png";
+import logo from "../../../assets/logo1.png";
 
 const Navbar = () => {
   const { isUserLoggedIn, usersDispatch, user } = useContext(DataContext);
